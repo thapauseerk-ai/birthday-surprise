@@ -41,6 +41,10 @@
         /* Page 1 Styles */
         #page1 {
             background: linear-gradient(135deg, #e6e6fa 0%, #d8bfd8 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding-top: 5vh;
         }
 
         .main-title {
@@ -50,6 +54,7 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
             margin-bottom: 1rem;
             animation: pop-in 0.8s ease-out forwards;
+            text-align: center;
         }
 
         @keyframes pop-in {
@@ -61,10 +66,11 @@
         /* Cake Styles - More Realistic */
         .cake-container {
             position: relative;
-            margin: 1rem 0 2rem 0;
+            margin: 2rem 0;
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-grow: 1;
         }
 
         .cake {
@@ -203,7 +209,7 @@
         }
 
         .birthday-card {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.85);
             border-radius: 25px;
             padding: 40px 30px;
             max-width: 600px;
@@ -215,6 +221,21 @@
             overflow: hidden;
         }
 
+        /* Your Picture Background */
+        .card-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.4;
+            z-index: 1;
+        }
+
         .card-bg-elements {
             position: absolute;
             top: 0;
@@ -222,6 +243,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
+            z-index: 2;
         }
 
         .confetti-container {
@@ -234,7 +256,7 @@
 
         .card-content {
             position: relative;
-            z-index: 2;
+            z-index: 3;
             text-align: center;
         }
 
@@ -243,23 +265,26 @@
             font-weight: 700;
             margin-bottom: 2rem;
             font-size: 2.2rem;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
         }
 
         /* Single Message Box */
         .message-box {
-            background: linear-gradient(135deg, #9370db, #8a2be2);
-            color: white;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
             padding: 30px;
             border-radius: 20px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.15);
             margin: 2rem 0;
-            border: 3px solid rgba(255,255,255,0.3);
+            border: 3px solid rgba(138, 43, 226, 0.3);
+            backdrop-filter: blur(10px);
         }
 
         .message-content {
             font-size: 1.2rem;
             line-height: 1.8;
             text-align: center;
+            color: #333;
         }
 
         .message-content p {
@@ -312,6 +337,33 @@
             50% { transform: translateY(-20px) rotate(10deg); }
         }
 
+        /* Volume Control */
+        .volume-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50px;
+            padding: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .volume-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .volume-btn:hover {
+            background: rgba(138, 43, 226, 0.1);
+            transform: scale(1.1);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .main-title {
@@ -326,6 +378,15 @@
             .message-box {
                 padding: 20px;
             }
+            
+            .volume-control {
+                top: 10px;
+                right: 10px;
+            }
+            
+            #page1 {
+                padding-top: 3vh;
+            }
         }
     </style>
 </head>
@@ -334,27 +395,31 @@
     <audio id="birthdaySong" loop>
         <source src="https://assets.mixkit.co/music/preview/mixkit-happy-birthday-to-you-493.mp3" type="audio/mpeg">
     </audio>
-    
-    <audio id="clapSound">
-        <source src="https://assets.mixkit.co/sfx/preview/mixkit-audience-clapping-strongly-476.mp3" type="audio/mpeg">
-    </audio>
+
+    <!-- Volume Control -->
+    <div class="volume-control">
+        <button class="volume-btn" id="volumeDown" title="Lower Volume">🔉</button>
+        <button class="volume-btn" id="volumeUp" title="Higher Volume">🔊</button>
+    </div>
 
     <!-- Page 1: Birthday Cake -->
     <div id="page1" class="page active">
-        <div class="container-fluid h-100 d-flex flex-column justify-content-center align-items-center">
+        <div class="container-fluid h-100 d-flex flex-column justify-content-start align-items-center">
             <div class="text-center">
                 <h1 class="main-title">Happy Birthday to Ma Pookie! 🎉</h1>
-                
-                <!-- Cake with Candles -->
-                <div class="cake-container">
-                    <div class="cake">
-                        <div class="cake-top"></div>
-                        <div class="cake-decoration"></div>
-                        <div class="candle"></div>
-                        <div class="flame" id="flame"></div>
-                    </div>
+            </div>
+            
+            <!-- Cake with Candles -->
+            <div class="cake-container">
+                <div class="cake">
+                    <div class="cake-top"></div>
+                    <div class="cake-decoration"></div>
+                    <div class="candle"></div>
+                    <div class="flame" id="flame"></div>
                 </div>
-                
+            </div>
+            
+            <div class="text-center">
                 <!-- Instructions -->
                 <p class="instructions">
                     Blow into your microphone or press SPACE to blow out the candles!
@@ -373,6 +438,9 @@
     <div id="page2" class="page">
         <div class="card-container">
             <div class="birthday-card">
+                <!-- Your Picture Background -->
+                <div class="card-background" id="cardBackground"></div>
+                
                 <!-- Background Elements -->
                 <div class="card-bg-elements">
                     <div class="confetti-container" id="confettiContainer"></div>
@@ -416,12 +484,58 @@
             const backBtn = document.getElementById('backBtn');
             const flame = document.getElementById('flame');
             const birthdaySong = document.getElementById('birthdaySong');
-            const clapSound = document.getElementById('clapSound');
             const confettiContainer = document.getElementById('confettiContainer');
             const floatingHearts = document.getElementById('floatingHearts');
+            const volumeDown = document.getElementById('volumeDown');
+            const volumeUp = document.getElementById('volumeUp');
+            const cardBackground = document.getElementById('cardBackground');
             
             let candlesBlown = false;
             let birthdaySongStarted = false;
+            let currentVolume = 0.6; // Default volume
+            
+            // Initialize audio volume
+            birthdaySong.volume = currentVolume;
+            
+            // Function to change the background image
+            function setCardBackground(imageUrl) {
+                cardBackground.style.backgroundImage = `url('${imageUrl}')`;
+            }
+            
+            // Set your picture as background (REPLACE THIS URL WITH YOUR PICTURE)
+            setCardBackground('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');
+            
+            // Volume control functions
+            volumeDown.addEventListener('click', function() {
+                if (currentVolume > 0.1) {
+                    currentVolume -= 0.1;
+                    birthdaySong.volume = currentVolume;
+                }
+                updateVolumeButtons();
+            });
+            
+            volumeUp.addEventListener('click', function() {
+                if (currentVolume < 1.0) {
+                    currentVolume += 0.1;
+                    birthdaySong.volume = currentVolume;
+                }
+                updateVolumeButtons();
+            });
+            
+            function updateVolumeButtons() {
+                // Visual feedback for volume levels
+                if (currentVolume <= 0.1) {
+                    volumeDown.style.opacity = '0.5';
+                } else {
+                    volumeDown.style.opacity = '1';
+                }
+                
+                if (currentVolume >= 1.0) {
+                    volumeUp.style.opacity = '0.5';
+                } else {
+                    volumeUp.style.opacity = '1';
+                }
+            }
             
             // Create floating hearts for card page
             function createFloatingHearts() {
@@ -441,21 +555,11 @@
             // Start birthday song on first user interaction
             function startBirthdaySong() {
                 if (!birthdaySongStarted) {
-                    birthdaySong.volume = 0.6;
                     birthdaySong.play().catch(e => {
                         console.log('Audio play was prevented');
                     });
                     birthdaySongStarted = true;
                 }
-            }
-            
-            // Play clap sound
-            function playClapSound() {
-                clapSound.volume = 0.7;
-                clapSound.currentTime = 0;
-                clapSound.play().catch(e => {
-                    console.log('Clap sound prevented');
-                });
             }
             
             // Create massive confetti
@@ -517,17 +621,15 @@
                 flame.style.animation = 'none';
                 flame.style.opacity = '0';
                 
-                // Stop birthday song
-                birthdaySong.pause();
-                birthdaySong.currentTime = 0;
+                // Lower volume for card page (but keep music playing)
+                currentVolume = 0.3; // Lower volume for card page
+                birthdaySong.volume = currentVolume;
+                updateVolumeButtons();
                 
-                // Play clap sound
-                playClapSound();
-                
-                // Create massive confetti
+                // Create massive confetti (but no clap sound)
                 createMassiveConfetti();
                 
-                console.log('Candles blown out! Birthday song stopped.');
+                console.log('Candles blown out! Volume lowered for card page.');
             }
             
             // Event Listeners
@@ -540,6 +642,7 @@
             // Start audio on first user interaction
             document.body.addEventListener('click', function() {
                 startBirthdaySong();
+                updateVolumeButtons();
             }, { once: true });
             
             // Gift icon click
@@ -559,7 +662,7 @@
                     page1.classList.remove('active');
                     page2.classList.add('active');
                     createFloatingHearts();
-                    // No sound plays when opening the card
+                    // Music continues at lower volume - no other sounds
                 }, 800);
             });
             
@@ -573,9 +676,10 @@
                 flame.style.animation = 'flicker 0.8s infinite alternate';
                 flame.style.opacity = '1';
                 
-                // Restart birthday song
-                birthdaySong.currentTime = 0;
-                birthdaySong.play();
+                // Restore normal volume when going back to cake page
+                currentVolume = 0.6;
+                birthdaySong.volume = currentVolume;
+                updateVolumeButtons();
             });
             
             // Simple microphone blow detection (optional)
@@ -589,6 +693,9 @@
                         console.log('Microphone access not available');
                     });
             }
+            
+            // Initialize volume buttons
+            updateVolumeButtons();
         });
     </script>
 </body>
