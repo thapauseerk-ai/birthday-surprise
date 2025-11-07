@@ -8,11 +8,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
     <style>
-        /* All CSS styles go here */
         * {
             margin: 0;
             padding: 0;
@@ -20,10 +16,10 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial Rounded MT Bold', 'Segoe UI', sans-serif;
             height: 100vh;
             overflow: hidden;
-            background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%);
+            background: linear-gradient(135deg, #e6e6fa 0%, #d8bfd8 100%);
         }
 
         .page {
@@ -42,12 +38,17 @@
             visibility: visible;
         }
 
+        /* Page 1 Styles */
+        #page1 {
+            background: linear-gradient(135deg, #e6e6fa 0%, #d8bfd8 100%);
+        }
+
         .main-title {
-            font-size: 3.5rem;
+            font-size: 3.2rem;
             font-weight: 700;
-            color: #d63384;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            margin-bottom: 2rem;
+            color: #8a2be2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
             animation: pop-in 0.8s ease-out forwards;
         }
 
@@ -57,153 +58,285 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
+        /* Cake Styles - More Realistic */
         .cake-container {
             position: relative;
-            margin: 2rem 0;
+            margin: 1rem 0 2rem 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .cake {
-            width: 200px;
-            height: 100px;
-            background: #f8c8dc;
+            width: 220px;
+            height: 120px;
+            background: linear-gradient(135deg, #f5c9d0 0%, #f8c8dc 100%);
             border-radius: 10px 10px 0 0;
             position: relative;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            box-shadow: 
+                0 8px 25px rgba(0,0,0,0.15),
+                inset 0 -5px 10px rgba(0,0,0,0.1);
         }
 
         .cake-top {
             position: absolute;
-            top: -20px;
+            top: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 220px;
-            height: 40px;
-            background: #ff9ebb;
+            width: 240px;
+            height: 35px;
+            background: linear-gradient(135deg, #ff9ebb 0%, #ff85a3 100%);
             border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 
+                0 4px 15px rgba(0,0,0,0.1),
+                inset 0 2px 5px rgba(255,255,255,0.5);
+        }
+
+        .cake-decoration {
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 230px;
+            height: 25px;
+            background: repeating-linear-gradient(
+                45deg,
+                #ff6b9c,
+                #ff6b9c 10px,
+                #ffd1dc 10px,
+                #ffd1dc 20px
+            );
+            border-radius: 50%;
         }
 
         .candle {
             position: absolute;
-            width: 10px;
-            height: 40px;
-            background: linear-gradient(to bottom, #4cd137, #44bd32);
-            top: -50px;
+            width: 12px;
+            height: 45px;
+            background: linear-gradient(to bottom, #ff6b6b, #ff5252);
+            top: -60px;
             left: 50%;
             transform: translateX(-50%);
-            border-radius: 5px 5px 0 0;
+            border-radius: 6px 6px 0 0;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
         }
 
         .flame {
             position: absolute;
-            width: 15px;
-            height: 25px;
-            background: linear-gradient(to top, #ff9f43, #ffd32a);
+            width: 18px;
+            height: 30px;
+            background: linear-gradient(to top, #ffd93d, #ff9f43, #ff6b6b);
             border-radius: 50% 50% 20% 20%;
-            top: -70px;
+            top: -85px;
             left: 50%;
             transform: translateX(-50%);
             animation: flicker 0.8s infinite alternate;
-            box-shadow: 0 0 10px #ff9f43, 0 0 20px #ff9f43;
+            box-shadow: 
+                0 0 15px #ff9f43,
+                0 0 30px #ff9f43,
+                0 0 45px #ff6b6b;
+            filter: blur(1px);
         }
 
         @keyframes flicker {
-            0% { transform: translateX(-50%) scale(1); opacity: 0.9; }
-            25% { transform: translateX(-50%) scale(1.05); opacity: 1; }
-            50% { transform: translateX(-50%) scale(0.95); opacity: 0.8; }
-            75% { transform: translateX(-50%) scale(1.1); opacity: 1; }
-            100% { transform: translateX(-50%) scale(1); opacity: 0.9; }
+            0% { transform: translateX(-50%) scale(1) rotate(-2deg); opacity: 0.9; }
+            25% { transform: translateX(-50%) scale(1.1) rotate(1deg); opacity: 1; }
+            50% { transform: translateX(-50%) scale(0.95) rotate(-1deg); opacity: 0.8; }
+            75% { transform: translateX(-50%) scale(1.05) rotate(2deg); opacity: 1; }
+            100% { transform: translateX(-50%) scale(1) rotate(-2deg); opacity: 0.9; }
         }
 
         .instructions {
-            color: #333;
+            color: #6a5acd;
             font-weight: 500;
-            background: rgba(255,255,255,0.8);
-            padding: 10px 20px;
+            background: rgba(255,255,255,0.7);
+            padding: 12px 24px;
             border-radius: 25px;
             display: inline-block;
             font-size: 1.1rem;
+            margin: 1rem 0;
+            border: 2px solid rgba(138, 43, 226, 0.2);
         }
 
+        /* Gift Box Styles */
         .gift-section {
             text-align: center;
-            margin-top: 2rem;
+            margin-top: 1.5rem;
         }
 
-        .gift-box {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            margin: 0 auto;
+        .gift-emoji {
+            font-size: 5rem;
             cursor: pointer;
+            display: inline-block;
             transition: all 0.3s ease;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
         }
 
-        .gift-box:hover {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .gift-body {
-            width: 100px;
-            height: 80px;
-            background: linear-gradient(45deg, #d63384, #e91e63);
-            position: absolute;
-            bottom: 0;
-            left: 10px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        .gift-lid {
-            width: 110px;
-            height: 25px;
-            background: linear-gradient(45deg, #c22574, #d63384);
-            position: absolute;
-            top: 0;
-            left: 5px;
-            border-radius: 8px 8px 0 0;
-            transition: transform 0.3s ease;
-        }
-
-        .gift-box:hover .gift-lid {
-            transform: translateY(-10px) rotate(-5deg);
-        }
-
-        .ribbon-horizontal {
-            position: absolute;
-            width: 100%;
-            height: 15px;
-            background: #ffd700;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .ribbon-vertical {
-            position: absolute;
-            width: 15px;
-            height: 100%;
-            background: #ffd700;
-            left: 50%;
-            transform: translateX(-50%);
+        .gift-emoji:hover {
+            transform: scale(1.2) rotate(10deg);
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));
         }
 
         .gift-text {
-            color: #333;
+            color: #6a5acd;
             font-weight: 500;
-            background: rgba(255,255,255,0.8);
-            padding: 8px 16px;
+            background: rgba(255,255,255,0.7);
+            padding: 8px 20px;
             border-radius: 20px;
             display: inline-block;
             margin-top: 1rem;
+            border: 2px solid rgba(138, 43, 226, 0.2);
         }
 
-        /* Add more styles as needed */
+        /* Page 2 Styles */
+        #page2 {
+            background: linear-gradient(135deg, #e6e6fa 0%, #d8bfd8 100%);
+            padding: 20px;
+        }
+
+        .card-container {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .birthday-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 40px 30px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.1),
+                0 0 0 2px rgba(138, 43, 226, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-bg-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .confetti-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .card-title {
+            color: #8a2be2;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
+        }
+
+        /* Single Message Box */
+        .message-box {
+            background: linear-gradient(135deg, #9370db, #8a2be2);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            margin: 2rem 0;
+            border: 3px solid rgba(255,255,255,0.3);
+        }
+
+        .message-content {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .message-content p {
+            margin-bottom: 1rem;
+        }
+
+        /* Buttons */
+        .card-actions {
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #8a2be2, #9370db);
+            border: none;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(138, 43, 226, 0.4);
+        }
+
+        /* Floating Hearts */
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .birthday-card {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+            
+            .message-box {
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Audio Element -->
+    <!-- Audio Elements -->
     <audio id="birthdaySong" loop>
         <source src="https://assets.mixkit.co/music/preview/mixkit-happy-birthday-to-you-493.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id="clapSound">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-audience-clapping-strongly-476.mp3" type="audio/mpeg">
     </audio>
 
     <!-- Page 1: Birthday Cake -->
@@ -216,6 +349,7 @@
                 <div class="cake-container">
                     <div class="cake">
                         <div class="cake-top"></div>
+                        <div class="cake-decoration"></div>
                         <div class="candle"></div>
                         <div class="flame" id="flame"></div>
                     </div>
@@ -228,100 +362,233 @@
                 
                 <!-- Gift Box -->
                 <div class="gift-section">
-                    <div class="gift-box" id="giftBox">
-                        <div class="gift-lid"></div>
-                        <div class="gift-body">
-                            <div class="ribbon-horizontal"></div>
-                            <div class="ribbon-vertical"></div>
-                        </div>
-                    </div>
+                    <div class="gift-emoji" id="giftIcon">🎁</div>
                     <p class="gift-text">Click the gift to open your surprise!</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- JavaScript -->
+    <!-- Page 2: Birthday Card -->
+    <div id="page2" class="page">
+        <div class="card-container">
+            <div class="birthday-card">
+                <!-- Background Elements -->
+                <div class="card-bg-elements">
+                    <div class="confetti-container" id="confettiContainer"></div>
+                    <div class="floating-hearts" id="floatingHearts"></div>
+                </div>
+                
+                <!-- Card Content -->
+                <div class="card-content">
+                    <h2 class="card-title">To My Dearest Best Friend ❤️</h2>
+                    
+                    <!-- Single Message Box -->
+                    <div class="message-box">
+                        <div class="message-content">
+                            <p>🎂 Happy birthday to the most amazing person I know!</p>
+                            <p>💖 Even though we're miles apart, you're always close to my heart.</p>
+                            <p>🌟 I cherish all our memories and can't wait to create more together.</p>
+                            <p>✨ Wishing you all the happiness in the world today and always!</p>
+                            <p>🥰 Thank you for being my rock, my confidant, and my partner in crime.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="card-actions">
+                        <button class="btn btn-primary" id="backBtn">
+                            🎂 Back to Cake
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap & JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
-        // Simple JavaScript functionality
         document.addEventListener('DOMContentLoaded', function() {
             const page1 = document.getElementById('page1');
-            const giftBox = document.getElementById('giftBox');
+            const page2 = document.getElementById('page2');
+            const giftIcon = document.getElementById('giftIcon');
+            const backBtn = document.getElementById('backBtn');
             const flame = document.getElementById('flame');
             const birthdaySong = document.getElementById('birthdaySong');
+            const clapSound = document.getElementById('clapSound');
+            const confettiContainer = document.getElementById('confettiContainer');
+            const floatingHearts = document.getElementById('floatingHearts');
             
             let candlesBlown = false;
+            let birthdaySongStarted = false;
             
-            // Play birthday song
-            birthdaySong.volume = 0.7;
-            document.body.addEventListener('click', function() {
-                birthdaySong.play();
-            }, { once: true });
+            // Create floating hearts for card page
+            function createFloatingHearts() {
+                const hearts = ['❤️', '💖', '💕', '💗', '💓'];
+                for (let i = 0; i < 15; i++) {
+                    const heart = document.createElement('div');
+                    heart.classList.add('floating-heart');
+                    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.top = Math.random() * 100 + '%';
+                    heart.style.animationDelay = Math.random() * 6 + 's';
+                    heart.style.fontSize = (20 + Math.random() * 20) + 'px';
+                    floatingHearts.appendChild(heart);
+                }
+            }
             
-            // Blow out candles with space bar
+            // Start birthday song on first user interaction
+            function startBirthdaySong() {
+                if (!birthdaySongStarted) {
+                    birthdaySong.volume = 0.6;
+                    birthdaySong.play().catch(e => {
+                        console.log('Audio play was prevented');
+                    });
+                    birthdaySongStarted = true;
+                }
+            }
+            
+            // Play clap sound
+            function playClapSound() {
+                clapSound.volume = 0.7;
+                clapSound.currentTime = 0;
+                clapSound.play().catch(e => {
+                    console.log('Clap sound prevented');
+                });
+            }
+            
+            // Create massive confetti
+            function createMassiveConfetti() {
+                const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#ffbe0b', '#fb5607', '#8338ec', '#8a2be2', '#9370db'];
+                
+                // Create A LOT of confetti - 200 pieces!
+                for (let i = 0; i < 200; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.style.cssText = `
+                        position: absolute;
+                        width: ${8 + Math.random() * 8}px;
+                        height: ${8 + Math.random() * 8}px;
+                        background: ${colors[Math.floor(Math.random() * colors.length)]};
+                        border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
+                        left: ${Math.random() * 100}%;
+                        top: ${Math.random() * 100}%;
+                        animation: confettiFall ${3 + Math.random() * 4}s ease-out forwards;
+                        z-index: 100;
+                        transform: rotate(${Math.random() * 360}deg);
+                    `;
+                    confettiContainer.appendChild(confetti);
+                    
+                    setTimeout(() => {
+                        if (confetti.parentNode) {
+                            confetti.parentNode.removeChild(confetti);
+                        }
+                    }, 7000);
+                }
+                
+                // Add confetti animation
+                if (!document.querySelector('#confettiAnimation')) {
+                    const style = document.createElement('style');
+                    style.id = 'confettiAnimation';
+                    style.innerHTML = `
+                        @keyframes confettiFall {
+                            0% { 
+                                transform: translateY(-100px) rotate(0deg) scale(1); 
+                                opacity: 1; 
+                            }
+                            50% { 
+                                opacity: 0.8; 
+                            }
+                            100% { 
+                                transform: translateY(100vh) rotate(360deg) scale(0); 
+                                opacity: 0; 
+                            }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                }
+            }
+            
+            // Blow out candles with space bar or microphone
+            function blowOutCandles() {
+                if (candlesBlown) return;
+                
+                candlesBlown = true;
+                flame.style.animation = 'none';
+                flame.style.opacity = '0';
+                
+                // Stop birthday song
+                birthdaySong.pause();
+                birthdaySong.currentTime = 0;
+                
+                // Play clap sound
+                playClapSound();
+                
+                // Create massive confetti
+                createMassiveConfetti();
+                
+                console.log('Candles blown out! Birthday song stopped.');
+            }
+            
+            // Event Listeners
             document.addEventListener('keydown', function(event) {
                 if (event.code === 'Space' && !candlesBlown) {
                     blowOutCandles();
                 }
             });
             
-            function blowOutCandles() {
-                candlesBlown = true;
-                flame.style.animation = 'none';
-                flame.style.opacity = '0';
-                
-                // Create confetti
-                createConfetti();
-            }
+            // Start audio on first user interaction
+            document.body.addEventListener('click', function() {
+                startBirthdaySong();
+            }, { once: true });
             
-            function createConfetti() {
-                const colors = ['#ff6b6b', '#4ecdc4', '#ffbe0b', '#8338ec'];
-                for (let i = 0; i < 30; i++) {
-                    const confetti = document.createElement('div');
-                    confetti.style.cssText = `
-                        position: fixed;
-                        width: 10px;
-                        height: 10px;
-                        background: ${colors[Math.floor(Math.random() * colors.length)]};
-                        border-radius: 50%;
-                        left: ${Math.random() * 100}vw;
-                        top: ${Math.random() * 100}vh;
-                        animation: confettiFall 2s forwards;
-                        z-index: 1000;
-                    `;
-                    document.body.appendChild(confetti);
-                    
-                    setTimeout(() => confetti.remove(), 2000);
-                }
-                
-                // Add confetti animation
-                const style = document.createElement('style');
-                style.innerHTML = `
-                    @keyframes confettiFall {
-                        0% { transform: translateY(-100px) scale(0); opacity: 1; }
-                        50% { transform: translateY(50vh) scale(1); opacity: 0.8; }
-                        100% { transform: translateY(100vh) scale(0); opacity: 0; }
-                    }
-                `;
-                document.head.appendChild(style);
-            }
-            
-            // Gift box click
-            giftBox.addEventListener('click', function() {
+            // Gift icon click
+            giftIcon.addEventListener('click', function() {
                 if (!candlesBlown) {
                     alert('Blow out the candles first! 🎂');
                     return;
                 }
                 
-                this.style.transform = 'scale(1.2) rotate(10deg)';
+                // Add gift opening animation
+                this.style.transform = 'scale(1.3) rotate(15deg)';
+                
+                // Create some confetti for gift opening
+                createMassiveConfetti();
                 
                 setTimeout(() => {
-                    alert('Card page would open here! 🎁');
-                    // In full version, this would show page 2
-                }, 500);
+                    page1.classList.remove('active');
+                    page2.classList.add('active');
+                    createFloatingHearts();
+                    // No sound plays when opening the card
+                }, 800);
             });
+            
+            // Back button
+            backBtn.addEventListener('click', function() {
+                page2.classList.remove('active');
+                page1.classList.add('active');
+                
+                // Reset candles
+                candlesBlown = false;
+                flame.style.animation = 'flicker 0.8s infinite alternate';
+                flame.style.opacity = '1';
+                
+                // Restart birthday song
+                birthdaySong.currentTime = 0;
+                birthdaySong.play();
+            });
+            
+            // Simple microphone blow detection (optional)
+            if (navigator.mediaDevices) {
+                navigator.mediaDevices.getUserMedia({ audio: true })
+                    .then(function(stream) {
+                        console.log('Microphone access granted for blow detection');
+                        // Add blow detection logic here if needed
+                    })
+                    .catch(function(err) {
+                        console.log('Microphone access not available');
+                    });
+            }
         });
     </script>
 </body>
