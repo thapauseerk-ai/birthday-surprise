@@ -1,0 +1,92 @@
+/* Animation Keyframes */
+@keyframes flicker {
+    0% { transform: translateX(-50%) scale(1); opacity: 0.9; }
+    25% { transform: translateX(-50%) scale(1.05); opacity: 1; }
+    50% { transform: translateX(-50%) scale(0.95); opacity: 0.8; }
+    75% { transform: translateX(-50%) scale(1.1); opacity: 1; }
+    100% { transform: translateX(-50%) scale(1); opacity: 0.9; }
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    5% { transform: scale(1.1); }
+    10% { transform: scale(1.08); }
+    15% { transform: scale(1.12); }
+    50% { transform: scale(1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes sparkle {
+    0% { transform: scale(0) rotate(0deg); opacity: 0; }
+    50% { transform: scale(1.5) rotate(180deg); opacity: 1; }
+    100% { transform: scale(0) rotate(360deg); opacity: 0; }
+}
+
+@keyframes confettiFall {
+    0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes pop-in {
+    0% { transform: scale(0.5); opacity: 0; }
+    70% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fade-in {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-up {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Animation Classes */
+.animate-pop-in {
+    animation: pop-in 0.8s ease-out forwards;
+}
+
+.animate-fade-in {
+    animation: fade-in 0.6s ease-out forwards;
+}
+
+.animate-slide-up {
+    animation: slide-up 0.8s ease-out forwards;
+}
+
+.flickering {
+    animation: flicker 0.8s infinite alternate;
+}
+
+.heart-beating {
+    animation: heartbeat 1.2s infinite;
+}
+
+.sparkle-effect {
+    animation: sparkle 2s infinite;
+}
+
+.confetti-piece {
+    animation: confettiFall 5s linear forwards;
+}
+
+/* Candle Blow Effect */
+.candle-blown .flame {
+    animation: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Gift Opening Animation */
+.gift-opening .gift-lid {
+    transform: translateY(-50px) rotate(-15deg);
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.gift-opening .gift-body {
+    transform: scale(1.2);
+    transition: transform 0.5s ease;
+}
