@@ -624,6 +624,8 @@ function startAudio() {
                     birthdaySongStarted = true;
                 }
             }
+            // Auto-start when page loads
+document.addEventListener('DOMContentLoaded', startBirthdaySong);
             
             // Blow out candles with space bar
             function blowOutCandles() {
