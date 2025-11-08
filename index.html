@@ -162,16 +162,16 @@
             font-size: 1.1rem;
             border: 2px solid rgba(138, 43, 226, 0.3);
             position: absolute;
-            bottom: 25%;
+            bottom: 30%;
             left: 50%;
             transform: translateX(-50%);
             white-space: nowrap;
         }
 
-        /* Gift Box Styles */
+        /* Gift Box Styles - Moved Closer to Bottom */
         .gift-section {
             position: absolute;
-            bottom: 15%;
+            bottom: 10%;
             left: 50%;
             transform: translateX(-50%);
             text-align: center;
@@ -212,8 +212,8 @@
         .birthday-card {
             background: rgba(255, 255, 255, 0.92);
             border-radius: 25px;
-            padding: 50px 40px;
-            max-width: 700px;
+            padding: 40px 30px;
+            max-width: 800px;
             width: 90%;
             box-shadow: 
                 0 25px 50px rgba(0, 0, 0, 0.15),
@@ -254,7 +254,7 @@
         .card-title {
             color: #8a2be2;
             font-weight: 700;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             font-size: 2.5rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
@@ -263,15 +263,15 @@
         .message-box {
             background: linear-gradient(135deg, rgba(147, 112, 219, 0.9), rgba(138, 43, 226, 0.9));
             color: white;
-            padding: 40px 35px;
+            padding: 35px 30px;
             border-radius: 25px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            margin: 2.5rem 0;
+            margin: 2rem 0;
             border: 4px solid rgba(255,255,255,0.4);
         }
 
         .message-content {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             line-height: 1.8;
             text-align: center;
         }
@@ -280,9 +280,35 @@
             margin-bottom: 1.2rem;
         }
 
+        /* Images Section */
+        .images-section {
+            margin: 2rem 0;
+        }
+
+        .images-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 1rem;
+        }
+
+        .memory-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .memory-image:hover {
+            transform: scale(1.05);
+        }
+
         /* Buttons */
         .card-actions {
-            margin-top: 2.5rem;
+            margin-top: 2rem;
         }
 
         .btn {
@@ -334,6 +360,44 @@
             transform: scale(1.15);
         }
 
+        /* Audio Fix Overlay */
+        .audio-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(138, 43, 226, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            flex-direction: column;
+            color: white;
+        }
+
+        .audio-overlay.hidden {
+            display: none;
+        }
+
+        .start-button {
+            background: white;
+            color: #8a2be2;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.3rem;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .start-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .main-title {
@@ -359,17 +423,21 @@
             }
             
             .birthday-card {
-                padding: 35px 25px;
+                padding: 30px 20px;
             }
             
             .message-box {
-                padding: 30px 25px;
+                padding: 25px 20px;
             }
             
             .instructions {
                 font-size: 1rem;
                 padding: 10px 20px;
-                bottom: 22%;
+                bottom: 25%;
+            }
+            
+            .images-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
@@ -379,6 +447,13 @@
     <audio id="birthdaySong" loop>
         <source src="https://assets.mixkit.co/music/preview/mixkit-happy-birthday-to-you-493.mp3" type="audio/mpeg">
     </audio>
+
+    <!-- Audio Fix Overlay -->
+    <div class="audio-overlay" id="audioOverlay">
+        <h2>🎉 Ready for the Birthday Surprise? 🎉</h2>
+        <p>Click the button below to start the music and celebration!</p>
+        <button class="start-button" id="startButton">Start Celebration! 🎂</button>
+    </div>
 
     <!-- Volume Control -->
     <div class="volume-control">
@@ -405,7 +480,7 @@
             Blow into your microphone or press SPACE to blow out the candles!
         </p>
         
-        <!-- Gift Box -->
+        <!-- Gift Box - Moved Closer to Bottom -->
         <div class="gift-section">
             <div class="gift-emoji" id="giftIcon">🎁</div>
         </div>
@@ -430,6 +505,17 @@
                             <p>🌟 I cherish all our memories and can't wait to create more together.</p>
                             <p>✨ Wishing you all the happiness in the world today and always!</p>
                             <p>🥰 Thank you for being my rock, my confidant, and my partner in crime.</p>
+                        </div>
+                    </div>
+
+                    <!-- Images Section -->
+                    <div class="images-section">
+                        <h4 style="color: #8a2be2; margin-bottom: 1rem;">Our Beautiful Memories 💫</h4>
+                        <div class="images-grid">
+                            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Memory 1" class="memory-image">
+                            <img src="https://images.unsplash.com/photo-1531263060782-b024de9b9793?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Memory 2" class="memory-image">
+                            <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Memory 3" class="memory-image">
+                            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Memory 4" class="memory-image">
                         </div>
                     </div>
                     
@@ -458,14 +544,28 @@
             const volumeDown = document.getElementById('volumeDown');
             const volumeUp = document.getElementById('volumeUp');
             const fallingConfetti = document.getElementById('fallingConfetti');
+            const audioOverlay = document.getElementById('audioOverlay');
+            const startButton = document.getElementById('startButton');
             
             let candlesBlown = false;
             let birthdaySongStarted = false;
             let currentVolume = 0.7; // Default volume
-            
-            // Initialize audio volume
-            birthdaySong.volume = currentVolume;
-            
+
+            // Audio Fix: Start music with user interaction
+            startButton.addEventListener('click', function() {
+                // Start the birthday song
+                birthdaySong.volume = currentVolume;
+                birthdaySong.play().then(() => {
+                    console.log('Audio started successfully!');
+                    birthdaySongStarted = true;
+                    audioOverlay.classList.add('hidden');
+                }).catch(error => {
+                    console.log('Audio play failed:', error);
+                });
+                
+                updateVolumeButtons();
+            });
+
             // Volume control functions
             volumeDown.addEventListener('click', function() {
                 if (currentVolume > 0.1) {
@@ -502,14 +602,14 @@
                 const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#ffbe0b', '#fb5607', '#8338ec', '#8a2be2', '#9370db'];
                 
                 // Create continuous falling confetti
-                for (let i = 0; i < 50; i++) {
+                for (let i = 0; i < 30; i++) {
                     setTimeout(() => {
                         createConfettiPiece();
                     }, i * 200);
                 }
                 
                 // Keep creating new confetti
-                setInterval(createConfettiPiece, 300);
+                setInterval(createConfettiPiece, 400);
             }
             
             function createConfettiPiece() {
@@ -540,12 +640,12 @@
                 }, (duration + delay) * 1000);
             }
             
-            // Create massive confetti explosion
+            // Create massive confetti explosion (for candle blow)
             function createMassiveConfetti() {
                 const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#ffbe0b', '#fb5607', '#8338ec', '#8a2be2', '#9370db'];
                 
-                // Create A LOT of confetti - 300 pieces!
-                for (let i = 0; i < 300; i++) {
+                // Create A LOT of confetti - 250 pieces!
+                for (let i = 0; i < 250; i++) {
                     const confetti = document.createElement('div');
                     confetti.style.cssText = `
                         position: fixed;
@@ -567,39 +667,58 @@
                         }
                     }, 5000);
                 }
+            }
+            
+            // Create smaller confetti (for gift click)
+            function createSmallConfetti() {
+                const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#ffbe0b', '#fb5607', '#8338ec', '#8a2be2', '#9370db'];
                 
-                // Add confetti explosion animation
-                if (!document.querySelector('#confettiExplosion')) {
-                    const style = document.createElement('style');
-                    style.id = 'confettiExplosion';
-                    style.innerHTML = `
-                        @keyframes confettiExplosion {
-                            0% { 
-                                transform: translateY(0) rotate(0deg) scale(1); 
-                                opacity: 1; 
-                            }
-                            50% { 
-                                transform: translateY(-50vh) rotate(180deg) scale(1.2); 
-                                opacity: 0.8; 
-                            }
-                            100% { 
-                                transform: translateY(100vh) rotate(360deg) scale(0); 
-                                opacity: 0; 
-                            }
-                        }
+                // Create less confetti - only 80 pieces for gift click
+                for (let i = 0; i < 80; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.style.cssText = `
+                        position: fixed;
+                        width: ${8 + Math.random() * 8}px;
+                        height: ${8 + Math.random() * 8}px;
+                        background: ${colors[Math.floor(Math.random() * colors.length)]};
+                        border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
+                        left: ${Math.random() * 100}vw;
+                        top: ${Math.random() * 100}vh;
+                        animation: confettiExplosion ${1.5 + Math.random() * 2}s ease-out forwards;
+                        z-index: 1000;
+                        transform: rotate(${Math.random() * 360}deg);
                     `;
-                    document.head.appendChild(style);
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => {
+                        if (confetti.parentNode) {
+                            confetti.parentNode.removeChild(confetti);
+                        }
+                    }, 4000);
                 }
             }
             
-            // Start birthday song on first user interaction
-            function startBirthdaySong() {
-                if (!birthdaySongStarted) {
-                    birthdaySong.play().catch(e => {
-                        console.log('Audio play was prevented');
-                    });
-                    birthdaySongStarted = true;
-                }
+            // Add confetti explosion animation
+            if (!document.querySelector('#confettiExplosion')) {
+                const style = document.createElement('style');
+                style.id = 'confettiExplosion';
+                style.innerHTML = `
+                    @keyframes confettiExplosion {
+                        0% { 
+                            transform: translateY(0) rotate(0deg) scale(1); 
+                            opacity: 1; 
+                        }
+                        50% { 
+                            transform: translateY(-50vh) rotate(180deg) scale(1.2); 
+                            opacity: 0.8; 
+                        }
+                        100% { 
+                            transform: translateY(100vh) rotate(360deg) scale(0); 
+                            opacity: 0; 
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
             }
             
             // Blow out candles with space bar
@@ -623,12 +742,6 @@
                 }
             });
             
-            // Start audio on first user interaction
-            document.body.addEventListener('click', function() {
-                startBirthdaySong();
-                updateVolumeButtons();
-            }, { once: true });
-            
             // Gift icon click
             giftIcon.addEventListener('click', function() {
                 if (!candlesBlown) {
@@ -644,8 +757,8 @@
                 birthdaySong.volume = currentVolume;
                 updateVolumeButtons();
                 
-                // Create confetti for gift opening
-                createMassiveConfetti();
+                // Create SMALLER confetti for gift opening
+                createSmallConfetti();
                 
                 setTimeout(() => {
                     page1.classList.remove('active');
