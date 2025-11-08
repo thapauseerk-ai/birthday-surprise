@@ -16,13 +16,25 @@
         }
 
         body {
+            <!-- Audio Overlay - Add this right after <body> -->
+<div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(138, 43, 226, 0.95); display: flex; justify-content: center; align-items: center; z-index: 9999; flex-direction: column; color: white; text-align: center; padding: 20px;" id="audioOverlay">
+    <h2 style="font-size: 2.5rem; margin-bottom: 20px;">🎉 Birthday Surprise! 🎉</h2>
+    <p style="font-size: 1.3rem; margin-bottom: 30px;">Click the button to start the music and celebration!</p>
+    <button style="background: white; color: #8a2be2; border: none; padding: 20px 50px; font-size: 1.5rem; border-radius: 30px; cursor: pointer; font-weight: bold;" onclick="startAudio()">Start Celebration! 🎂</button>
+</div>
+
+<script>
+function startAudio() {
+    document.getElementById('birthdaySong').play();
+    document.getElementById('audioOverlay').style.display = 'none';
+}
+</script>
             font-family: 'Arial Rounded MT Bold', 'Segoe UI', sans-serif;
             height: 100vh;
             overflow: hidden;
             background: linear-gradient(135deg, #e6e6fa 0%, #d8bfd8 100%);
         }
 
-        /* Rest of your CSS remains the same */
         .page {
             position: absolute;
             top: 0;
@@ -65,24 +77,317 @@
             100% { transform: translateX(-50%) scale(1); opacity: 1; }
         }
 
-        /* ... rest of your CSS styles ... */
+        /* Cake Styles */
+        .cake-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin: 0;
+        }
+
+        .cake {
+            width: 240px;
+            height: 130px;
+            background: linear-gradient(135deg, #f5c9d0 0%, #f8c8dc 100%);
+            border-radius: 10px 10px 0 0;
+            position: relative;
+            box-shadow: 
+                0 12px 30px rgba(0,0,0,0.2),
+                inset 0 -8px 15px rgba(0,0,0,0.1);
+        }
+
+        .cake-top {
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 260px;
+            height: 40px;
+            background: linear-gradient(135deg, #ff9ebb 0%, #ff85a3 100%);
+            border-radius: 50%;
+            box-shadow: 
+                0 6px 20px rgba(0,0,0,0.15),
+                inset 0 3px 8px rgba(255,255,255,0.6);
+        }
+
+        .cake-decoration {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 250px;
+            height: 30px;
+            background: repeating-linear-gradient(
+                45deg,
+                #ff6b9c,
+                #ff6b9c 12px,
+                #ffd1dc 12px,
+                #ffd1dc 24px
+            );
+            border-radius: 50%;
+        }
+
+        .candle {
+            position: absolute;
+            width: 14px;
+            height: 50px;
+            background: linear-gradient(to bottom, #ff6b6b, #ff5252);
+            top: -65px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 7px 7px 0 0;
+            box-shadow: inset 0 0 12px rgba(0,0,0,0.15);
+        }
+
+        .flame {
+            position: absolute;
+            width: 20px;
+            height: 35px;
+            background: linear-gradient(to top, #ffd93d, #ff9f43, #ff6b6b);
+            border-radius: 50% 50% 20% 20%;
+            top: -95px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: flicker 0.8s infinite alternate;
+            box-shadow: 
+                0 0 20px #ff9f43,
+                0 0 40px #ff9f43,
+                0 0 60px #ff6b6b;
+            filter: blur(1px);
+        }
+
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1) rotate(-2deg); opacity: 0.9; }
+            25% { transform: translateX(-50%) scale(1.1) rotate(1deg); opacity: 1; }
+            50% { transform: translateX(-50%) scale(0.95) rotate(-1deg); opacity: 0.8; }
+            75% { transform: translateX(-50%) scale(1.05) rotate(2deg); opacity: 1; }
+            100% { transform: translateX(-50%) scale(1) rotate(-2deg); opacity: 0.9; }
+        }
+
+        .instructions {
+            color: #6a5acd;
+            font-weight: 500;
+            background: rgba(255,255,255,0.8);
+            padding: 12px 24px;
+            border-radius: 25px;
+            display: inline-block;
+            font-size: 1.1rem;
+            border: 2px solid rgba(138, 43, 226, 0.3);
+            position: absolute;
+            bottom: 25%;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+
+        /* Gift Box Styles */
+        .gift-section {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+
+        .gift-emoji {
+            font-size: 6rem;
+            cursor: pointer;
+            display: inline-block;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .gift-emoji:hover {
+            transform: scale(1.3) rotate(15deg);
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4));
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Page 2 Styles */
+        #page2 {
+            background: linear-gradient(135deg, #e6e6fa 0%, #d8bfd8 100%);
+        }
+
+        .card-container {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .birthday-card {
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 25px;
+            padding: 50px 40px;
+            max-width: 700px;
+            width: 90%;
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.15),
+                0 0 0 3px rgba(138, 43, 226, 0.2);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .falling-confetti {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .card-title {
+            color: #8a2be2;
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Message Box */
+        .message-box {
+            background: linear-gradient(135deg, rgba(147, 112, 219, 0.9), rgba(138, 43, 226, 0.9));
+            color: white;
+            padding: 40px 35px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            margin: 2.5rem 0;
+            border: 4px solid rgba(255,255,255,0.4);
+        }
+
+        .message-content {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .message-content p {
+            margin-bottom: 1.2rem;
+        }
+
+        /* Buttons */
+        .card-actions {
+            margin-top: 2.5rem;
+        }
+
+        .btn {
+            padding: 14px 35px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #8a2be2, #9370db);
+            border: none;
+            color: white;
+            box-shadow: 0 6px 20px rgba(138, 43, 226, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.5);
+        }
+
+        /* Volume Control */
+        .volume-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255,255,255,0.95);
+            border-radius: 50px;
+            padding: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            border: 2px solid rgba(138, 43, 226, 0.3);
+        }
+
+        .volume-btn {
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            margin: 0 5px;
+        }
+
+        .volume-btn:hover {
+            background: rgba(138, 43, 226, 0.15);
+            transform: scale(1.15);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.8rem;
+                top: 12%;
+            }
+            
+            .cake {
+                width: 200px;
+                height: 110px;
+            }
+            
+            .cake-top {
+                width: 220px;
+            }
+            
+            .cake-decoration {
+                width: 210px;
+            }
+            
+            .gift-emoji {
+                font-size: 5rem;
+            }
+            
+            .birthday-card {
+                padding: 35px 25px;
+            }
+            
+            .message-box {
+                padding: 30px 25px;
+            }
+            
+            .instructions {
+                font-size: 1rem;
+                padding: 10px 20px;
+                bottom: 22%;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Audio Overlay - Add this RIGHT HERE at the top of the body -->
-    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(138, 43, 226, 0.95); display: flex; justify-content: center; align-items: center; z-index: 9999; flex-direction: column; color: white; text-align: center; padding: 20px;" id="audioOverlay">
-        <h2 style="font-size: 2.5rem; margin-bottom: 20px;">🎉 Birthday Surprise! 🎉</h2>
-        <p style="font-size: 1.3rem; margin-bottom: 30px;">Click the button to start the music and celebration!</p>
-        <button style="background: white; color: #8a2be2; border: none; padding: 20px 50px; font-size: 1.5rem; border-radius: 30px; cursor: pointer; font-weight: bold;" onclick="startAudio()">Start Celebration! 🎂</button>
-    </div>
-
-    <script>
-    function startAudio() {
-        document.getElementById('birthdaySong').play();
-        document.getElementById('audioOverlay').style.display = 'none';
-    }
-    </script>
-
     <!-- Audio Elements -->
     <audio id="birthdaySong" loop>
         <source src="assets/birthday-song.mp3">
@@ -95,7 +400,7 @@
     </div>
 
     <!-- Page 1: Birthday Cake -->
-    <div id="page1" class="page">
+    <div id="page1" class="page active">
         <h1 class="main-title">Happy Birthday to Ma Pookie! 🎉</h1>
         
         <!-- Cake with Candles -->
@@ -142,6 +447,8 @@
                             <p></p>
                             <p></p>
                             <p>Enjoy your day and have a fun time❤️</p>
+                    
+                          
                         </div>
                     </div>
                     
@@ -177,11 +484,6 @@
             
             // Initialize audio volume
             birthdaySong.volume = currentVolume;
-            
-            // Show page1 when audio starts
-            function showMainPage() {
-                page1.classList.add('active');
-            }
             
             // Volume control functions
             volumeDown.addEventListener('click', function() {
@@ -309,6 +611,16 @@
                 }
             }
             
+            // Start birthday song on first user interaction
+            function startBirthdaySong() {
+                if (!birthdaySongStarted) {
+                    birthdaySong.play().catch(e => {
+                        console.log('Audio play was prevented');
+                    });
+                    birthdaySongStarted = true;
+                }
+            }
+            
             // Blow out candles with space bar
             function blowOutCandles() {
                 if (candlesBlown) return;
@@ -329,6 +641,8 @@
                     blowOutCandles();
                 }
             });
+            
+           // Audio will start via the overlay button instead
             
             // Gift icon click
             giftIcon.addEventListener('click', function() {
